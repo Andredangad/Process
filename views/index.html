@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Process</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<a href="add">Ajouter un produit</a>
+
+    <script type="text/javascript">
+function submit()
+{
+
+  const userRequest = new XMLHttpRequest();
+  userRequest.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var rows = JSON.parse(this.responseText);
+    var tbl = "<table border=1>";
+    tbl += "<thead><td>Name</td><td>Description</td></thead>";
+    for (var i = 0; i < rows.length; i++)
+    {
+      tbl+="<tr><td id ='test'>"+rows[i].name+"</td><td id ='test2'>"+rows[i].descri+"</td><td><button onclick='update()'>Modifier</button></td></tr>";
+      console.log('record:', JSON.stringify(rows[i]));
+    }
+    tbl += "</table>";
+    document.getElementById("tbl").innerHTML = tbl;
+  }
+}
+  
+  
+  userRequest.open('post', '/recup');
+  userRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+  userRequest.send(JSON.stringify({'name':document.getElementById("name").value}));
+}
+
+</script>
+
+  </head>
+  <body>
+  <br />
+  Nom du produit : 
+    <input type="text" id="name"/>
+    <button onclick="submit()">Envoyer</button>
+	<div id="tbl">
+      
+    </div>
+  </body>
+</html>

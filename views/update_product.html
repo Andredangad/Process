@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Process</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<a href="../">Revenir au menu</a>
+    <script type="text/javascript">
+
+console.log('Testing Add');
+
+function submit()
+{
+
+  const userRequest = new XMLHttpRequest();
+  userRequest.open('post', '/addUser');
+  userRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+  userRequest.send(JSON.stringify({'name':document.getElementById("name").value, 'desc': document.getElementById("desc").value}));
+}
+</script>
+
+  </head>
+  <body>
+  <br />
+  Nouveau nom du produit :
+    <input type="text" id="name"/>
+	<br />
+	Nouvelle description du produit :
+    <input type="text" id="desc"/> 
+    <button onclick="submit()">Envoyer</button>
+  </body>
+</html>
